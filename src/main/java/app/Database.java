@@ -394,13 +394,7 @@ public class Database {
             while (res.next()) {
                 String userId = res.getString("user_id");
                 String birthday = res.getString("birthday");
-
-                // convert dates to <name of month> + <day>
-                LocalDate date = LocalDate.parse(birthday);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d");
-                String formattedDate = date.format(formatter);
-
-                output.put(userId, formattedDate);
+                output.put(userId, birthday);
             }
             return output;
         } catch (SQLException e) {

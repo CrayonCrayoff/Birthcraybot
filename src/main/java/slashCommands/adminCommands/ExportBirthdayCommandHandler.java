@@ -18,9 +18,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import static app.Bot.log;
 
@@ -92,11 +95,23 @@ public class ExportBirthdayCommandHandler implements SlashCommandInterface {
     }
 
     private void makeAndSendExportFile(Map<String, String> birthdaysByUserName, SlashCommandInteractionEvent event)  {
+
+        // Sort by birthday (yyyy-MM-dd)
+        List<Map.Entry<String, String>> sortedByBirthdays = birthdaysByUserName.entrySet()
+                .stream()
+                .sorted(Comparator.comparing(entry -> LocalDate.parse(entry.getValue())))
+                .toList();
+
         StringBuilder sb = new StringBuilder();
 
-        for (String username : birthdaysByUserName.keySet()) {
-            sb.append("User: ").append(username).append(" | ")
-                    .append("Birthday: ").append(birthdaysByUserName.get(username))
+        for (Map.Entry<String, String> entry : sortedByBirthdays) {
+            // convert dates to <name of month> + <day>
+            LocalDate date = LocalDate.parse(entry.getValue());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d");
+            String formattedDate = date.format(formatter);
+
+            sb.append("User: ").append(entry.getKey()).append(" | ")
+                    .append("Birthday: ").append(formattedDate)
                     .append("\n");
         }
 
