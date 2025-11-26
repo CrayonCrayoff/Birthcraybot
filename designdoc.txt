@@ -1,0 +1,56 @@
+TODO:
+[x] Set up basic bot
+
+
+[x] Set up local environment variables for DEV mode
+    [x] bot token
+    [x] test guild ID
+    [x] developer ID
+    [x] mode flag (DEV/PROD)
+
+
+[ ] Set up commands
+    [x] commands for general users
+        [x] "help" -> command for user command documentation
+        [x] "set-birthday" -> command to register/edit birthday and update database
+            [x] Modal with input fields
+            [x] store data efficiently in database
+        [x] "remove-birthday" -> remove birthday from database
+            [x] option for only this guild or every guild?
+
+    [ ] commands for admins
+        [x] "help-admin" -> command for admin command documentation
+        [x] "config-message" -> command that opens a pop-up modal to set shoutout messages
+        [x] "config-channel" -> command to set the channel
+        [x] "config-shoutout-role" -> command to set the shoutout role (optional)
+        [ ] "config-birthday-role" -> give birthday people their own special role (optional)
+        [ ] "remove-other-birthday" -> command to delete a user's entry from the database (this Guild only)
+        [ ] "dump-birthdays" -> command that returns all the birthdays for this Guild in a file
+
+
+[ ] Set up databases
+    [x] database for birthday information
+        [?] (Guild ID, User ID), birthday (duh), last shoutout?
+        [ ] Populate database with already registered birthdays in Gucci's server
+            [x] Just use a separate script for this?
+
+
+[ ] Set up logic
+    [x] refuse to work if shoutout channel is not set
+    [x] check if bot has access to designated shoutout channel?
+    [ ] periodically check if shoutouts are needed
+        [ ] check by birthday and calculate a good time?
+        [ ] OR pick a fixed time (like noon UTC)?  <--- probably easier
+    [ ] trigger for when someone leaves the server and remove their birthday from the database?
+    [ ] When bot is removed from a guild, prune database automatically?
+
+
+[ ] Set up system environment variables on Pi for PROD mode
+    [ ] bot token
+    [ ] test guild ID
+    [ ] developer ID
+    [ ] mode flag (DEV/PROD)
+    [ ] database path
+
+
+[ ] Set up log files? (in case of crashes)
