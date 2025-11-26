@@ -41,4 +41,4 @@ build/
 .env
 
 src/main/java/utils/
-designdoc.txtg
+.designdoc.txt
