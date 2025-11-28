@@ -42,3 +42,4 @@ build/
 
 src/main/java/utils/
 .designdoc.txt
+/data/birthcray.db
