@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.ChannelType;
+import net.dv8tion.jda.api.events.StatusChangeEvent;
 import net.dv8tion.jda.api.events.guild.GuildLeaveEvent;
 import net.dv8tion.jda.api.events.guild.UnavailableGuildLeaveEvent;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberRemoveEvent;
@@ -73,6 +74,19 @@ public class Bot extends ListenerAdapter {
         long nextDelay = BirthdayShoutoutHandler.secondsToNextNoonUTC();
         if (nextDelay > (12 * 60 * 60)) BirthdayShoutoutHandler.checkAndShoutout();
         BirthdayShoutoutHandler.startBirthdayCheckRoutine();
+    }
+
+
+    @Override
+    public void onStatusChange(StatusChangeEvent event) {
+        JDA.Status newState = event.getNewStatus();
+
+        log.info("Status changed to {}", newState);
+
+        if (newState == JDA.Status.DISCONNECTED || newState == JDA.Status.FAILED_TO_LOGIN) {
+            log.error("Bot disconnected. Shutting it down gracefully.");
+            System.exit(0);
+        }
     }
 
     @Override
