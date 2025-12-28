@@ -37,19 +37,19 @@ public class HelpAdminCommandHandler implements SlashCommandInterface {
                         * `/check-configs`
                         > Check how Birthcraybot is configured in your server. Will tell you if something is wrong.
 
-                        * `/set-config-channel`
+                        * `/set-config-config-channel`
                         >  Lets you set up the shoutout channel for Birthcraybot.
                         >  **IMPORTANT:** you **HAVE** to run this command at least once, or Birthcraybot ***CANNOT*** work properly.
                         
-                        * `/set-birthday-role`
+                        * `/set-config-birthday-role`
                         > (Optional) Register a role that will be given to the people whose birthday it is.
                         > **IMPORTANT:** Make sure Birthcraybot is above the specified role in the Roles hierarchy.
                         > **IMPORTANT:** Birthcraybot uses this information to remove the role as well the day after. If you ever change this, you might need to manually remove the role from people who have been given it.
                         
                         * `/set-config-messages`
-                        > (Optional) Lets you register the shoutout messages for when it's somebody's birthday. Use %s as a placeholder for where the usernames will go. If you don't include a placeholder, the user mentions will go at the end of the message by default.
+                        > (Optional) Lets you register the shoutout messages for when it's somebody's birthday. Use "%s" as a placeholder for where the usernames will go. If you don't include a placeholder, the user mentions will go at the end of the message by default.
                         
-                        * `/set-shoutout-role`
+                        * `/set-config-shoutout-role`
                         > (Optional) Register a role that will be used to notify guild members about (other) people's birthdays. It will show at the beginning of the shoutout message.
                         
                         * `/export-birthdays`

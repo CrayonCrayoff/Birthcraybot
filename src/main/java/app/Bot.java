@@ -76,12 +76,9 @@ public class Bot extends ListenerAdapter {
         BirthdayShoutoutHandler.startBirthdayCheckRoutine();
     }
 
-
     @Override
     public void onStatusChange(StatusChangeEvent event) {
         JDA.Status newState = event.getNewStatus();
-
-        log.info("Status changed to {}", newState);
 
         if (newState == JDA.Status.DISCONNECTED || newState == JDA.Status.FAILED_TO_LOGIN) {
             log.error("Bot disconnected. Shutting it down gracefully.");
