@@ -110,9 +110,7 @@ public class ExportBirthdayCommandHandler implements SlashCommandInterface {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d");
             String formattedDate = date.format(formatter);
 
-            sb.append("User: ").append(entry.getKey()).append(" | ")
-                    .append("Birthday: ").append(formattedDate)
-                    .append("\n");
+            sb.append(formattedDate).append(" | ").append(entry.getKey()).append("\n");
         }
 
         File file;
