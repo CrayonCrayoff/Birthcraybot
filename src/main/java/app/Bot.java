@@ -81,7 +81,10 @@ public class Bot extends ListenerAdapter {
         JDA.Status newState = event.getNewStatus();
 
         if (newState == JDA.Status.DISCONNECTED || newState == JDA.Status.FAILED_TO_LOGIN) {
-            log.error("Bot disconnected. Shutting it down gracefully.");
+            event.getJDA().shutdown();
+            try {
+                Thread.sleep(1000); // give JDA a moment to clean up
+            } catch (InterruptedException ignored) {}
             System.exit(0);
         }
     }

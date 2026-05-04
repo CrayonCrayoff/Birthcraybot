@@ -31,7 +31,8 @@ public class BirthdayShoutoutHandler {
                 } finally {
                     long nextDelay = secondsToNextNoonUTC();
                     if (nextDelay <= 1) {
-                        nextDelay = 24 * 60 * 60; // schedule for 24 hours from now if too close to noon
+                        // schedule for 24 hours from now if too close to noon
+                        nextDelay = 24 * 60 * 60;
                         log.info("nextDelay calculated too close to noon, set to 24 hours");
                     }
                     log.info("nextDelay calculated at {} seconds", nextDelay);
@@ -48,7 +49,9 @@ public class BirthdayShoutoutHandler {
         ZonedDateTime now = ZonedDateTime.now(ZoneOffset.UTC);
         ZonedDateTime nextNoon = now.withHour(12).withMinute(0).withSecond(0).withNano(0);
         if (!nextNoon.isAfter(now)) nextNoon = nextNoon.plusDays(1);
-        return Duration.between(Instant.now(), nextNoon.toInstant()).toSeconds();
+
+        // add one second to ensure check happens at or very slightly after noon
+        return Duration.between(Instant.now(), nextNoon.toInstant()).toSeconds() + 1;
     }
 
     public static void checkAndShoutout() {
